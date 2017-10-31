@@ -20,10 +20,8 @@
     "webpack"
   ],
   "author": "Isaiah Christou",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/BroodMeister/chatty-app/issues"
-  },
+  "license": "",
+  "bugs": "",
   "homepage": "https://github.com/BroodMeister/chatty-app",
   "engines": {
     "node": ">=6.0.0"
