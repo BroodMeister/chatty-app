@@ -9,7 +9,7 @@ class Message extends Component {
   }
 
   render() {
-    console.log("<Message/>");
+    console.log("<Message/>:", this.props.username);
 
     return (
       <div className="message">
