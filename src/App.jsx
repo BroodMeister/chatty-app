@@ -44,15 +44,13 @@ class App extends Component {
     return Math.max(...idArr) + 1;
   }
 
-  onEnter = (e, username) => {
-    if (e.key === 'Enter') {
-      const newMsg = {
-        id: this._createNewMessageId(),
-        username: username,
-        content: e.target.value
-      };
-      this.setState({messages: this.state.messages.concat(newMsg)});
-    }
+  onCreate = (username, content) => {
+    const newMsg = {
+      id: this._createNewMessageId(),
+      username: username,
+      content: content
+    };
+    this.setState({messages: this.state.messages.concat(newMsg)});
   }
 
   render() {
@@ -63,7 +61,7 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList messages={this.state.messages}/>
-        <ChatBar name={this.state.currentUser.name} onEnter={this.onEnter}/>
+        <ChatBar name={this.state.currentUser.name} onCreate={this.onCreate}/>
       </div>
     );
   }
