@@ -39,13 +39,15 @@ class App extends Component {
     return Math.max(...idArr) + 1;
   }
 
-  onCreate = (username, content) => {
+  addMessage = (username, content) => {
     const newMsg = {
       id: this._createNewMessageId(),
       username: username,
       content: content
     };
-    this.setState({messages: this.state.messages.concat(newMsg)});
+    console.log("here sends to server");
+    this.state.socket.send(`User ${newMsg.username} said ${newMsg.content}`);
+    // this.setState({messages: this.state.messages.concat(newMsg)});
   }
 
   render() {
@@ -56,12 +58,9 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList messages={this.state.messages}/>
-        <ChatBar name={this.state.currentUser.name} onCreate={this.onCreate}/>
+        <ChatBar name={this.state.currentUser.name} addMessage={this.addMessage}/>
       </div>
     );
   }
 }
 export default App;
-// <div className="message system">
-//   Anonymous1 changed their name to nomnom.
-// </div>

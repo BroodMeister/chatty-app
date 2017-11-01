@@ -28,7 +28,7 @@ class ChatBar extends Component {
 
   _onEnter = (e) => {
     if (e.key === 'Enter') {
-      this.props.onCreate(this.props.name, e.target.value);
+      this.props.addMessage(this.props.name, e.target.value);
       this.setState(defaultState);
     }
   }
