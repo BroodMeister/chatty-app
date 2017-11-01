@@ -33,9 +33,13 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList messages={this.state.messages}/>
-        <ChatBar name={this.state.currentUser.name} addMessage={this._addMessage}/>
+        <ChatBar name={this.state.currentUser.name} updateUser={this._updateUser} addMessage={this._addMessage}/>
       </div>
     );
+  }
+
+  _updateUser = (username) => {
+    this.setState({currentUser: {name: username}});
   }
 
   _addMessage = (username, content) => {
