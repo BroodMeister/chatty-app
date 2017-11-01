@@ -3,51 +3,26 @@ import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
 
 class App extends Component {
+
+  socket = new WebSocket("ws://localhost:3001", "protocolOne");
+
   constructor() {
     super();
     this.state = {
       currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [
-        {
-          id: 1,
-          username: "Bob",
-          content: "Has anyone seen my marbles?",
-        },
-        {
-          id: 2,
-          username: "Anonymous",
-          content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
-        }
-      ],
-      socket: new WebSocket("ws://localhost:3001", "protocolOne")
+      messages: []
     };
   }
 
   componentDidMount() {
     console.log("componentDidMount <App />");
-    this.state.socket.onopen = (e) => {
-      this.state.socket.send("test");
+    this.socket.onmessage = (event) => {
+      const newMsg = JSON.parse(event.data);
+      this.setState((prevState) => {
+        prevState.messages.push(newMsg);
+        this.setState({messages: prevState.messages});
+      });
     }
-  }
-
-  _createNewMessageId() {
-    // returns the
-    const idArr = [];
-    this.state.messages.forEach((msg) => {
-      idArr.push(msg.id);
-    });
-    return Math.max(...idArr) + 1;
-  }
-
-  addMessage = (username, content) => {
-    const newMsg = {
-      id: this._createNewMessageId(),
-      username: username,
-      content: content
-    };
-    console.log("here sends to server");
-    this.state.socket.send(`User ${newMsg.username} said ${newMsg.content}`);
-    // this.setState({messages: this.state.messages.concat(newMsg)});
   }
 
   render() {
@@ -58,9 +33,17 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList messages={this.state.messages}/>
-        <ChatBar name={this.state.currentUser.name} addMessage={this.addMessage}/>
+        <ChatBar name={this.state.currentUser.name} addMessage={this._addMessage}/>
       </div>
     );
+  }
+
+  _addMessage = (username, content) => {
+    const newMsg = {
+      username: username,
+      content: content
+    };
+    this.socket.send(JSON.stringify(newMsg));
   }
 }
 export default App;
