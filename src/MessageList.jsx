@@ -4,9 +4,6 @@ import Message from './Message.jsx';
 class MessageList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      //
-    }
   }
 
   render() {
@@ -14,9 +11,15 @@ class MessageList extends Component {
     return (
       <div className="messages" id="message-list">
         {this.props.messages.map((msg) => {
-          return (
-            <Message key={msg.id.toString()} username={msg.username} content={msg.content}/>
+          if (msg.username) {
+            return (
+              <Message key={msg.id.toString()} username={msg.username} content={msg.content}/>
             );
+          } else {
+            return (
+              <div className="message system">User {msg.prevName} changed their to {msg.newName}</div>
+            );
+          }
         })}
       </div>
     );
