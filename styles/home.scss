@@ -10,6 +10,11 @@ body {
   margin: 70px 0;
 }
 
+img {
+  width: 60%;
+  display: block;
+}
+
 .chatbar {
   background: tomato;
   border-top: 1px solid black;
@@ -42,6 +47,7 @@ body {
 .message {
   display: flex;
   padding: 5px;
+  overflow: scroll;
 }
 
 .message.system {
