@@ -9,7 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentUser: {name: "Anonymous"}, // optional. if currentUser is not defined, it means the user is Anonymous
+      currentUser: { name: "Anonymous" },
       messages: [],
       counter: 0
     };
@@ -17,13 +17,18 @@ class App extends Component {
 
   componentDidMount() {
     console.log("componentDidMount <App />");
+    this.socket.onopen = (e) => {
+      this.socket.send(JSON.stringify({ type: "postRegister" }));
+    }
+
     this.socket.onmessage = (event) => {
+      console.log("Received:", event.data);
       const msg = JSON.parse(event.data);
       switch(msg.type) {
         case "incomingNotification":
           this.setState((prevState) => {
             prevState.messages.push(msg.data);
-            this.setState({message: prevState.messages});
+            this.setState({messages: prevState.messages});
           });
           break;
         case "incomingMessage":

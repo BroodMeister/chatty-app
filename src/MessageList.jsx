@@ -13,7 +13,7 @@ class MessageList extends Component {
         {this.props.messages.map((msg) => {
           if (msg.username) {
             return (
-              <Message key={msg.id.toString()} username={msg.username} content={msg.content}/>
+              <Message key={msg.id.toString()} color={msg.color} username={msg.username} content={msg.content}/>
             );
           } else {
             return (
