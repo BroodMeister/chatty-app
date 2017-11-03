@@ -17,7 +17,7 @@ class MessageList extends Component {
             );
           } else {
             return (
-              <div className="message system">User {msg.prevName} changed their to {msg.newName}</div>
+              <div className="message system">User {msg.prevName} changed their name to {msg.newName}</div>
             );
           }
         })}
