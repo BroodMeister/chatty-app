@@ -5,8 +5,8 @@ Chatty-app is primarily a client-side SPA (single-page app) built with ReactJS.
 ## Getting Started
 
 1. Fork this repository, as well as [chatty_server](https://github.com/BroodMeister/chatty_server) then clone your fork of each.
-2. Install dependencies using the `npm install` command.
-3. Start the web server for both chatty-app and chatty_sever using the `npm start` command. The app will be served at <http://localhost:3000/>.
+2. Install dependencies using the `npm install` command for each individual folder.
+3. Start up the web server for both chatty-app and chatty_sever using the `npm start` command for each of them. The app will be served at <http://localhost:3000/>.
 4. Go to <http://localhost:3000/> in your browser.
 
 ## Final Product
